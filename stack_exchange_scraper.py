@@ -4,6 +4,7 @@ import csv
 import re
 import time
 from fake_useragent import UserAgent
+import csv
 
 # all topic choices
 # topic = "pets"

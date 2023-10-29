@@ -1,3 +1,7 @@
 #dataset
 
 #*.csv
+
+*.txt
+
+config.txt
