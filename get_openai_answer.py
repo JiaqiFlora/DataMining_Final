@@ -9,7 +9,7 @@ api_key = config['openai']['api_key']
 openai.api_key = api_key
 
 # directory_path = "dataset/stackexchange"
-directory_path = "dataset/exist_stackexchange"
+directory_path = "dataset/transfer_csv_stackexchange"
 output_directory = "dataset/openai_answer"
 csv_files = [f for f in os.listdir(directory_path) if f.endswith('.csv')]
 
