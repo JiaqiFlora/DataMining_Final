@@ -1,7 +1,7 @@
 import praw
 import csv
 
-post_num = 1000
+post_num = 30000
 
 # Reddit API credentials
 CLIENT_ID = "H-4dRHrbjYWOUf0Pt4HntA"
@@ -20,9 +20,42 @@ reddit = praw.Reddit(user_agent=True, client_id="H-4dRHrbjYWOUf0Pt4HntA",
 
 
 # Get hot posts
-hot_posts = reddit.subreddit("all").hot(limit=post_num)
-data = []
+# hot_posts = reddit.subreddit("all").hot(limit=post_num)
+# data = []
+#
+#
+# for post in hot_posts:
+#     print("\n\n===========a new post!=========")
+#     print(post.title)
+#     print(post.num_comments)
+#
+#     if post.num_comments > 0:
+#         post.comment_sort = 'best'  # Sorting comments by 'best'
+#         # post.comment_limit = 1  # Limiting to 1 comment
+#
+#         print("###################")
+#         print(post.title)
+#         print(post.comments[0].body)
+#         data.append([post.title, post.comments[0].body])
+#
+#
+# # Write to CSV
+# with open(f"dataset/reddit/reddit_data_{post_num}.csv", "w", newline="") as csvfile:
+#     writer = csv.writer(csvfile)
+#     writer.writerow(["question", "answer"])
+#     writer.writerows(data)
 
+
+
+
+# Get hot posts
+hot_posts = reddit.subreddit("all").hot(limit=post_num)
+
+# Open CSV file and write header
+csv_path = f"dataset/reddit/reddit_data_{post_num}.csv"
+with open(csv_path, "w", newline="") as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerow(["question", "answer"])
 
 for post in hot_posts:
     print("\n\n===========a new post!=========")
@@ -31,16 +64,13 @@ for post in hot_posts:
 
     if post.num_comments > 0:
         post.comment_sort = 'best'  # Sorting comments by 'best'
-        # post.comment_limit = 1  # Limiting to 1 comment
 
-        print("###################")
-        print(post.title)
-        print(post.comments[0].body)
-        data.append([post.title, post.comments[0].body])
+        if len(post.comments) > 0:
+            print("###################")
+            print(post.title)
+            print(post.comments[0].body)
 
-
-# Write to CSV
-with open(f"dataset/reddit/reddit_data_{post_num}.csv", "w", newline="") as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(["question", "answer"])
-    writer.writerows(data)
+            # Write to CSV row by row
+            with open(csv_path, "a", newline="") as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow([post.title, post.comments[0].body])
