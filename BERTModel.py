@@ -78,15 +78,48 @@ for epoch in range(epochs):
         scheduler.step()
         model.zero_grad()
 
-# 5. evaluate the model
+
+
+# # 5. evaluate the model
+# model.eval()
+#
+# predictions = []
+# true_labels = []
+#
+# for batch in test_dataloader:
+#     batch = tuple(t.to('cpu') for t in batch)
+#     b_input_ids, b_input_mask, b_labels = batch
+#
+#     with torch.no_grad():
+#         outputs = model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask)
+#     logits = outputs[0]
+#     logits = logits.detach().cpu().numpy()
+#     label_ids = b_labels.to('cpu').numpy()
+#
+#     predictions.extend(np.argmax(logits, axis=1).flatten().tolist())
+#     true_labels.extend(label_ids.flatten().tolist())
+#
+# test_accuracy = accuracy_score(true_labels, predictions)
+# print(f"Test Accuracy: {test_accuracy:.2f}")
+
+
+
+# 5. evaluate the model and save predictions
 model.eval()
 
 predictions = []
 true_labels = []
+questions = []
+answers = []
 
 for batch in test_dataloader:
     batch = tuple(t.to('cpu') for t in batch)
     b_input_ids, b_input_mask, b_labels = batch
+
+    # Decode the input ids back to text and collect questions and answers
+    texts = [tokenizer.decode(input_id, skip_special_tokens=True) for input_id in b_input_ids]
+    questions.extend(test_df["question"].iloc[len(questions):len(questions) + len(texts)].tolist())
+    answers.extend(texts)
 
     with torch.no_grad():
         outputs = model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask)
@@ -94,8 +127,25 @@ for batch in test_dataloader:
     logits = logits.detach().cpu().numpy()
     label_ids = b_labels.to('cpu').numpy()
 
-    predictions.extend(np.argmax(logits, axis=1).flatten().tolist())
+    pred_labels = np.argmax(logits, axis=1).flatten().tolist()
+    predictions.extend(pred_labels)
     true_labels.extend(label_ids.flatten().tolist())
 
+# Create a DataFrame with the questions, answers, and the predicted is_human labels
+results_df = pd.DataFrame({
+    'question': questions,
+    'answer': answers,
+    'predicted_is_human': predictions  # Directly use the predictions list
+})
+
+# Save the results to a new CSV file
+results_df.to_csv("dataset/data_for_model/test_result_predictions.csv", index=False)
+
+# print out result
 test_accuracy = accuracy_score(true_labels, predictions)
 print(f"Test Accuracy: {test_accuracy:.2f}")
+
+
+# save the model
+# Save only the model parameters (recommended)
+torch.save(model.state_dict(), 'model/bert_model_state_dict.pth')
