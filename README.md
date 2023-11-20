@@ -11,9 +11,9 @@ Chelsea Joe, Jiaqi(Flora) Gan, Kewen(Coco) Huang
 
 ## Final Deliverable
 - scraped data: in the `dataset` folder in this project
-- trained model: [model link]()
+- trained model: [model link](https://drive.google.com/file/d/1v5MKOQWS7QCLrjBnsA52cXpsmim3fpz5/view?usp=sharing)
 - game record video: [video link](https://drive.google.com/file/d/1yMtKrH_1vQNTIWOQPleaeZu5j9gJtD7W/view?usp=sharing)
-- game repo: [game repo link]()
+- game repo: [game repo link](https://github.com/JiaqiFlora/AITakeOver_Datamining_Game)
 
 ## Usage
 Some important usage of this project are as following:
