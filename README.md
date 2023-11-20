@@ -2,7 +2,7 @@
 
 Chelsea Joe, Jiaqi(Flora) Gan, Kewen(Coco) Huang
 
-## Quetions
+## Questions
 - Main Question: Can we develop a model that can differentiate between AI and human generated answers?
 - Should we use a pretrained model or should we use the basic functionality in Scikit learn?
 - How can we get sufficient AI and human generated answer to train our model?
@@ -16,7 +16,7 @@ Chelsea Joe, Jiaqi(Flora) Gan, Kewen(Coco) Huang
 - game repo: [game repo link]()
 
 ## Usage
-Some important parts of this project are as following:
+Some important usage of this project are as following:
 - scrape the data from stack exchange: ` python stack_exchange_scraper.py`
 - get the OpenAI answer: `python get_openai_answer.py`
         
