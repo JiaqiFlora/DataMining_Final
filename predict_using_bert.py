@@ -9,7 +9,7 @@ import numpy as np
 # Define the path to your saved model and test dataset
 MODEL_PATH = 'model/bert_model_state_dict.pth'
 TEST_DATA_PATH = 'dataset/data_for_model/cleaned_test.csv'
-RESULTS_PATH = 'dataset/data_for_model/test_result_predictions_new.csv'
+RESULTS_PATH = 'dataset/data_for_model/test_result_predictions_new_2.csv'
 
 # Initialize the tokenizer and model
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
