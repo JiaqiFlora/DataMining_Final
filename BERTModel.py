@@ -125,35 +125,3 @@ print(f"Test Accuracy: {test_accuracy:.2f}")
 # save the model
 # Save only the model parameters (recommended)
 torch.save(model.state_dict(), 'model/bert_model_state_dict.pth')
-
-
-
-
-
-
-
-
-
-
-
-# # 5. evaluate the model
-# model.eval()
-#
-# predictions = []
-# true_labels = []
-#
-# for batch in test_dataloader:
-#     batch = tuple(t.to('cpu') for t in batch)
-#     b_input_ids, b_input_mask, b_labels = batch
-#
-#     with torch.no_grad():
-#         outputs = model(b_input_ids, token_type_ids=None, attention_mask=b_input_mask)
-#     logits = outputs[0]
-#     logits = logits.detach().cpu().numpy()
-#     label_ids = b_labels.to('cpu').numpy()
-#
-#     predictions.extend(np.argmax(logits, axis=1).flatten().tolist())
-#     true_labels.extend(label_ids.flatten().tolist())
-#
-# test_accuracy = accuracy_score(true_labels, predictions)
-# print(f"Test Accuracy: {test_accuracy:.2f}")

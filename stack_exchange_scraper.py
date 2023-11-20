@@ -11,8 +11,8 @@ import csv
 # topic = "sports"
 # topic = "history"
 
-# topics = ["sports", "history", "poker", "astronomy", "ebooks", "genai", "bicycles", "writing", "parenting", "travel", "movies", "politics", "ebooks", "alcohol", "coffee", "economics", "literature"]
-topics = ["cooking", "music", "law", "pets", "freelancing", "pm"]
+topics = ["sports", "history", "poker", "astronomy", "ebooks", "genai", "bicycles", "writing", "parenting", "travel", "movies", "politics", "ebooks", "alcohol", "coffee", "economics", "literature"]
+# topics = ["cooking", "music", "law", "pets", "freelancing", "pm"]
 max_pages = 10
 # BASE_URL = f"https://{cur_topic}.stackexchange.com/questions?tab=votes&pagesize=50&page="
 
